@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  max-width: 1200px;
+
+  .flex {
+    display: flex;
+  }
+  .row {
+    flex-direction: row;
+  }
+  .column {
+    flex-direction: column;
+  }
+  .j-center {
+    justify-content: center;
+  }
+  .genres {
+    justify-content: space-between;
+  }
+  .more {
+    justify-content: space-around;
+  }
+  .overview {
+    max-width: 350px;
+  }
+  .cast,
+  .crew {
+    width: 500px;
+    height: 300px;
+    overflow-x: auto;
+    .members {
+      display: flex;
+      align-content: space-around;
+      justify-content: space-around;
+      flex-direction: column;
+      margin-right: 20px;
+      img {
+        height: 80%;
+      }
+    }
+  }
+}
