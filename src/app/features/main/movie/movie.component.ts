@@ -9,7 +9,7 @@ import { ApiService } from 'src/app/shared/service/api.service';
 })
 export class MovieComponent implements OnInit {
   id: any;
-
+  works: boolean;
   data: any;
   cast: any;
   crew: any;
@@ -26,20 +26,23 @@ export class MovieComponent implements OnInit {
     this.http.getMovie(this.id).subscribe(
       (res: any) => {
         this.data = res;
+        this.works = true;
         console.log(res);
       },
       (error) => {
         if (error.status == 404) {
+          this.works = false;
           alert("Opss.. Couldn't find a movie!");
           this.router.navigate;
         } else {
+          this.works = false;
           alert('Opss.. Something went wrong!');
         }
       }
     );
     this.http.getCast(this.id).subscribe((res) => {
+      this.works = false;
       this.cast = res.cast;
-      this.crew = res.crew;
       console.log(res);
     });
   }

@@ -1,0 +1,33 @@
+nav {
+  height: calc(100vh * 0.06);
+  width: 100%;
+  background-color: green;
+  position: fixed;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    margin-left: 25px;
+    height: 100%;
+    img {
+      height: inherit;
+    }
+  }
+
+  input {
+    height: 50%;
+    border: none;
+    border-radius: 10px;
+  }
+  button {
+    width: 5%;
+    height: 50%;
+    margin-right: 25px;
+    border: none;
+    border-radius: 10px;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+}
