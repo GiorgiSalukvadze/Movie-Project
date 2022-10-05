@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
+import { SearchService } from 'src/app/shared/service/search.service';
 import { ApiService } from '../../shared/service/api.service';
 
 @Component({
@@ -22,10 +23,16 @@ export class MainComponent implements OnInit {
   selectedIndex: number = 0;
   indicators: boolean = true;
 
-  constructor(private http: ApiService, private router: Router) {}
+  constructor(
+    private http: ApiService,
+    private router: Router,
+    private search: SearchService
+  ) {}
 
   Math = Math;
   ngOnInit(): void {
+    this.search.mustOpen$.next(false);
+    console.log(this.http.mustOpen);
     this.http.getUsers().subscribe((res) => {
       console.log(res.results);
       this.movies = res.results;

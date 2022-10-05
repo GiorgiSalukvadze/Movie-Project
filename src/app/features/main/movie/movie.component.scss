@@ -2,13 +2,21 @@
   width: 100vw;
   height: 100vh;
   background-color: rgb(82, 125, 156);
+  display: flex;
+  justify-content: center;
 }
 .wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  padding-top: calc(100vh * 0.1);
-
+  justify-content: space-evenly;
+  align-items: center;
+  width: 70%;
+  height: calc(100vh * 0.8);
+  box-shadow: 0 8px 16px #dce1e1;
+  background-color: #00253e;
+  border-radius: 20px;
+  margin-top: calc(100vh * 0.1);
+  position: relative;
   .flex {
     display: flex;
   }
@@ -30,7 +38,6 @@
   .overview {
     max-width: 350px;
   }
-
   ::-webkit-scrollbar {
     width: 10px;
     border-radius: 20px;
@@ -46,24 +53,71 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-
-  .cast {
-    width: 500px;
-    height: 300px;
-    overflow-x: auto;
-    background-color: inherit;
-    border-radius: 15px;
-    .members {
-      display: flex;
-      align-content: space-around;
-      justify-content: space-around;
-      flex-direction: column;
-      margin-right: 20px;
-      img {
-        height: 80%;
-      }
-      h3 {
-        color: white;
+  .photo {
+    height: 80%;
+    width: 40%;
+    img {
+      border-radius: 15px;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    height: 80%;
+    width: 40%;
+    h1,
+    h2,
+    h3,
+    p {
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    h2 {
+      font-size: 16px;
+    }
+    p {
+      color: white;
+      background-color: rgb(82, 125, 156, 0.8);
+      padding: 10px 10px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 16px;
+    }
+    .genres {
+      justify-content: flex-start;
+      gap: 1%;
+    }
+    .overview {
+      align-self: center;
+    }
+    .cast-wrapper {
+      height: 45%;
+      width: 40%;
+      .cast {
+        overflow-x: auto;
+        background-color: inherit;
+        border-radius: 15px;
+        .members {
+          display: flex;
+          align-content: space-around;
+          justify-content: space-around;
+          flex-direction: column;
+          margin-right: 20px;
+          img {
+            height: 80%;
+          }
+          h3 {
+            color: white;
+            background-color: rgb(82, 125, 156, 0.8);
+            padding: 10px 10px;
+            border-radius: 10px;
+            text-align: center;
+          }
+        }
       }
     }
   }
