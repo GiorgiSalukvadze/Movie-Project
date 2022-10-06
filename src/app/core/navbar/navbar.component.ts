@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from 'src/app/shared/service/api.service';
-import { SearchService } from 'src/app/shared/service/search.service';
+import { LoginAuthService } from 'src/app/shared/service/login-auth.service';
+import { NavService } from 'src/app/shared/service/nav.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,10 +15,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
   movieName: string;
   formGroup: FormGroup;
   searchedMovies: any;
+  navAppear$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private api: ApiService, private search: SearchService) {}
+  constructor(
+    private api: ApiService,
+    private search: NavService,
+    private router: Router,
+    private login: LoginAuthService
+  ) {}
 
   ngOnInit(): void {
+    this.navAppear$ = this.search.navAppear$;
     this.search.mustOpen$.next(false);
     this.formGroup = new FormGroup({
       search: new FormControl('', [
@@ -29,6 +38,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.formGroup.reset();
       }
     });
+  }
+
+  logOut() {
+    localStorage.clear();
+    this.search.navAppear$.next(false);
+    this.login.isLogged = false;
+    this.router.navigate(['/login']);
   }
 
   getMovie(): void {

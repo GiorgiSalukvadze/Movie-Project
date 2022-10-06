@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/shared/service/api.service';
-import { SearchService } from 'src/app/shared/service/search.service';
+import { NavService } from 'src/app/shared/service/nav.service';
+import { Cast } from '../../../shared/interface/cast-interface';
+import { SingleMovie } from 'src/app/shared/interface/singleMovie-interface';
 
 @Component({
   selector: 'app-movie',
@@ -9,38 +11,38 @@ import { SearchService } from 'src/app/shared/service/search.service';
   styleUrls: ['./movie.component.scss'],
 })
 export class MovieComponent implements OnInit {
-  id: any;
+  id: string;
   works: boolean;
-  data: any;
-  cast: any;
-  crew: any;
+  data: SingleMovie;
+  cast: Cast[];
+
   constructor(
     private route: ActivatedRoute,
     private http: ApiService,
     private router: Router,
-    private search: SearchService
+    private search: NavService
   ) {}
 
   ngOnInit(): void {
     this.search.mustOpen$.next(false);
     this.route.paramMap.subscribe((params) => {
-      this.id = params.get('id');
+      this.id = params.get('id')!;
       this.getMovie(this.id);
     });
 
     this.http.getCast(this.id).subscribe((res) => {
       this.works = false;
-      this.cast = res.cast;
-      console.log(res);
+      this.cast = res;
+      console.log('cast:', this.cast);
     });
   }
 
-  getMovie(id: number): void {
+  getMovie(id: any): void {
     this.http.getMovie(id).subscribe(
       (res: any) => {
         this.data = res;
         this.works = true;
-        console.log(res);
+        console.log('data', this.data);
       },
       (error) => {
         if (error.status == 404) {

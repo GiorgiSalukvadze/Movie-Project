@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="navAppear$ | async">
   <a routerLink="/main" (click)="logoClicked()">
     <img src="../../../assets/logo-sample.png" alt="" />
   </a>
@@ -6,9 +6,9 @@
     <input type="text" placeholder="Search..." formControlName="search" />
     <button type="submit" (click)="getMovie()">Search</button>
   </form>
-  <button>Login</button>
+  <button class="logout" routerLink="/login" (click)="logOut()">Log Out</button>
 </nav>
-<div class="searched-wrapper">
+<div class="searched-wrapper" *ngIf="navAppear$ | async">
   <div class="searched" *ngIf="searchLoad() | async">
     <div
       class="contents"

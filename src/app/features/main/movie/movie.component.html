@@ -2,23 +2,23 @@
   <div class="wrapper">
     <div class="photo">
       <img
-        src="https://image.tmdb.org/t/p/w500{{ data?.poster_path }}"
+        src="https://image.tmdb.org/t/p/w500{{ data['poster_path'] }}"
         alt=""
       />
     </div>
     <div class="details">
-      <h1 class="title flex j-center">{{ data?.title }}</h1>
+      <h1 class="title flex j-center">{{ data["title"] }}</h1>
       <div class="genres flex row">
         <ng-container *ngFor="let genre of data?.genres">
-          <h2 class="">{{ genre?.name }} |</h2>
+          <h2 class="">{{ genre["name"] }} |</h2>
         </ng-container>
       </div>
       <div class="more flex row">
-        <h3>{{ data?.vote_average }}</h3>
-        <h3>{{ data?.runtime }}</h3>
+        <h3>{{ data["vote_average"] }}</h3>
+        <h3>{{ data["runtime"] }}</h3>
       </div>
       <div class="overview">
-        <p>{{ data?.overview }}</p>
+        <p>{{ data["overview"] }}</p>
       </div>
       <div class="cast-wrapper flex column">
         <div class="label">

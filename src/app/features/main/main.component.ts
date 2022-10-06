@@ -7,8 +7,11 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
-import { SearchService } from 'src/app/shared/service/search.service';
+import { LoginAuthService } from 'src/app/shared/service/login-auth.service';
+import { NavService } from 'src/app/shared/service/nav.service';
 import { ApiService } from '../../shared/service/api.service';
+import { Movie } from 'src/app/shared/interface/movie-interface';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -16,8 +19,8 @@ import { ApiService } from '../../shared/service/api.service';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
-  movies: any;
-  images: any = [];
+  movies: Movie[];
+  images: string[] = [];
   autoSlide: boolean = true;
   interval = 3000;
   selectedIndex: number = 0;
@@ -26,16 +29,17 @@ export class MainComponent implements OnInit {
   constructor(
     private http: ApiService,
     private router: Router,
-    private search: SearchService
+    private nav: NavService,
+    private login: LoginAuthService
   ) {}
 
   Math = Math;
   ngOnInit(): void {
-    this.search.mustOpen$.next(false);
-    console.log(this.http.mustOpen);
-    this.http.getUsers().subscribe((res) => {
-      console.log(res.results);
-      this.movies = res.results;
+    console.log(this.login.isLoggedIn());
+    this.nav.mustOpen$.next(false);
+    this.http.getMovies().subscribe((res) => {
+      console.log(res);
+      this.movies = res;
       this.movies.map((res: any) => {
         this.images.push(res.poster_path);
       });
@@ -47,9 +51,9 @@ export class MainComponent implements OnInit {
 
   onClick(): void {
     let selectedMovie = this.movies.find(
-      (item: any) => item.poster_path === this.images[this.selectedIndex]
+      (res: any) => res.poster_path === this.images[this.selectedIndex]
     );
-    this.router.navigate(['/movie/' + selectedMovie.id]);
+    this.router.navigate(['/movie/' + selectedMovie?.id]);
   }
 
   nextImage(): void {

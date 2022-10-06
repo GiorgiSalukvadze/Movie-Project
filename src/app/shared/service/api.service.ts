@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { User } from '../interface/user-interface';
+import { Movie } from '../interface/movie-interface';
+import { Cast } from '../interface/cast-interface';
+import { SingleMovie } from '../interface/singleMovie-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -11,22 +15,29 @@ export class ApiService {
   apiKey: string = 'e340f66524306d7a08361463e378a358';
   movieName: string;
   mustOpen: boolean = false;
-
   userUrl: string =
     'https://api.themoviedb.org/3/trending/all/week?api_key=e340f66524306d7a08361463e378a358';
+
+  public user: User = {
+    email: '',
+    password: '',
+    id: 0,
+  };
+
+  usersUrl: string = 'http://localhost:3000/users';
 
   movieNameSet(name: string) {
     this.movieName = name;
   }
 
-  getUsers() {
-    return this.http.get(this.userUrl).pipe(
+  getMovies(): Observable<Movie[]> {
+    return this.http.get<Movie[]>(this.userUrl).pipe(
       map((res: any) => {
-        return res;
+        return res.results;
       })
     );
   }
-  getMovie(id: Number) {
+  getMovie(id: string): Observable<SingleMovie> {
     return this.http
       .get(
         `https://api.themoviedb.org/3/movie/${id}?api_key=e340f66524306d7a08361463e378a358`
@@ -37,14 +48,14 @@ export class ApiService {
         })
       );
   }
-  getCast(id: Number) {
+  getCast(id: string): Observable<Cast[]> {
     return this.http
       .get(
         `https://api.themoviedb.org/3/movie/${id}/credits?api_key=e340f66524306d7a08361463e378a358`
       )
       .pipe(
         map((res: any) => {
-          return res;
+          return res.cast;
         })
       );
   }
@@ -58,5 +69,13 @@ export class ApiService {
           return res;
         })
       );
+  }
+
+  postUsers(data: User): Observable<User[]> {
+    return this.http.post(this.usersUrl, data) as Observable<User[]>;
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.http.get(this.usersUrl) as Observable<User[]>;
   }
 }
