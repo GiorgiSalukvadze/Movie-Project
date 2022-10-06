@@ -1,24 +1,9 @@
 {
   "users": [
     {
-      "email": "giorgi@gmail.com",
-      "password": "giorgi123",
-      "id": 0
-    },
-    {
-      "email": "zura@gmail.com",
-      "password": "123123123",
-      "id": 1
-    },
-    {
       "email": "levan@gmail.com",
       "password": "Troleibusi1",
       "id": 2
-    },
-    {
-      "email": "temurika@gmail.com",
-      "password": "asdasdasd",
-      "id": 3
     }
   ]
 }
