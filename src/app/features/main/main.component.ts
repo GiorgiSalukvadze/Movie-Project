@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  OnDestroy,
   OnInit,
   Renderer2,
   ViewChild,
@@ -18,7 +19,7 @@ import { of } from 'rxjs';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
   movies: Movie[];
   images: string[] = [];
   autoSlide: boolean = true;
@@ -71,5 +72,9 @@ export class MainComponent implements OnInit {
     } else {
       this.selectedIndex++;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.autoSlide = false;
   }
 }

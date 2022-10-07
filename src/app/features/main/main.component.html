@@ -21,39 +21,41 @@
         </span>
       </div>
     </div>
-    <div
-      class="contents"
-      *ngFor="let movie of movies"
-      [routerLink]="['/movie/' + movie.id.toString()]"
-    >
-      <img
-        src="https://image.tmdb.org/t/p/w500{{ movie?.poster_path }}"
-        alt=""
-        id="img"
-      />
-      <div id="image-overlay">
-        <div class="more">Details</div>
-      </div>
-      <div class="rating">
-        <div class="date-wrapper">
-          <small class="date" *ngIf="movie.first_air_date">{{
-            movie.first_air_date | date: "shortDate"
-          }}</small>
-          <small class="date" *ngIf="movie.release_date">{{
-            movie.release_date | date: "shortDate"
-          }}</small>
+    <div class="contents-wrapper">
+      <div
+        class="contents"
+        *ngFor="let movie of movies"
+        [routerLink]="['/movie/' + movie.id.toString()]"
+      >
+        <img
+          src="https://image.tmdb.org/t/p/w500{{ movie?.poster_path }}"
+          alt=""
+          id="img"
+        />
+        <div id="image-overlay">
+          <div class="more">Details</div>
         </div>
-        <div class="rating-wrapper">
-          <small>{{ movie.vote_average | number: ".2-2" }}</small>
-          <img
-            src="../../../assets/rating-icon.png"
-            alt=""
-            class="rating-star"
-          />
+        <div class="rating">
+          <div class="date-wrapper">
+            <small class="date" *ngIf="movie.first_air_date">{{
+              movie.first_air_date | date: "shortDate"
+            }}</small>
+            <small class="date" *ngIf="movie.release_date">{{
+              movie.release_date | date: "shortDate"
+            }}</small>
+          </div>
+          <div class="rating-wrapper">
+            <small>{{ movie.vote_average | number: ".2-2" }}</small>
+            <img
+              src="../../../assets/rating-icon.png"
+              alt=""
+              class="rating-star"
+            />
+          </div>
         </div>
+        <h3 *ngIf="movie.title">{{ movie.title }}</h3>
+        <h3 *ngIf="movie.name">{{ movie.name }}</h3>
       </div>
-      <h3 *ngIf="movie.title">{{ movie.title }}</h3>
-      <h3 *ngIf="movie.name">{{ movie.name }}</h3>
     </div>
   </div>
 </div>
