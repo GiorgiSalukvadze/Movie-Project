@@ -66,7 +66,7 @@ nav {
     border: none;
     border-radius: 10px;
     word-wrap: break-word;
-    padding: 10px 15px;
+    padding: 5px 15px;
     text-align: center;
     border-radius: 10px;
     background-color: rgb(82, 125, 156);
@@ -101,16 +101,16 @@ nav {
   justify-content: center;
   overflow-y: scroll;
 
-  #image-overlay {
+  #image-overlay2 {
     display: none;
   }
-  #img:hover {
+  #img2:hover {
     cursor: pointer;
     backdrop-filter: blur(5px);
     filter: blur(2px);
     transition: 0.3s ease;
   }
-  #img:hover ~ #image-overlay {
+  #img2:hover ~ #image-overlay2 {
     position: absolute;
     width: 60%;
     height: 8%;
@@ -125,7 +125,7 @@ nav {
     font-size: 18px;
     color: white;
   }
-  #image-overlay:hover {
+  #image-overlay2:hover {
     cursor: pointer;
     position: absolute;
     width: 60%;
@@ -156,7 +156,7 @@ nav {
       flex-direction: column;
       width: 22%;
       position: relative;
-      justify-content: center;
+      justify-content: space-around;
       img {
         width: 100%;
         height: 70%;

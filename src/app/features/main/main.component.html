@@ -24,7 +24,9 @@
     <div class="contents-wrapper">
       <div
         class="contents"
-        *ngFor="let movie of movies"
+        *ngFor="
+          let movie of movies | paginate: { itemsPerPage: 10, currentPage: num }
+        "
         [routerLink]="['/movie/' + movie.id.toString()]"
       >
         <img
@@ -57,5 +59,9 @@
         <h3 *ngIf="movie.name">{{ movie.name }}</h3>
       </div>
     </div>
+    <pagination-controls
+      class="center"
+      (pageChange)="num = $event"
+    ></pagination-controls>
   </div>
 </div>

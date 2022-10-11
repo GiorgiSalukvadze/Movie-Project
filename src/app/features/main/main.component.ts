@@ -26,6 +26,7 @@ export class MainComponent implements OnInit, OnDestroy {
   interval = 3000;
   selectedIndex: number = 0;
   indicators: boolean = true;
+  num: number = 1;
 
   constructor(
     private http: ApiService,
@@ -42,7 +43,7 @@ export class MainComponent implements OnInit, OnDestroy {
       console.log(res);
       this.movies = res;
       this.movies.map((res: any) => {
-        this.images.push(res.poster_path);
+        this.images.push(res.backdrop_path);
       });
     });
     if (this.autoSlide) {
@@ -52,7 +53,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   onClick(): void {
     let selectedMovie = this.movies.find(
-      (res: any) => res.poster_path === this.images[this.selectedIndex]
+      (res: any) => res.backdrop_path === this.images[this.selectedIndex]
     );
     this.router.navigate(['/movie/' + selectedMovie?.id]);
   }

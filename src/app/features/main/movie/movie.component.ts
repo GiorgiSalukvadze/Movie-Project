@@ -12,7 +12,7 @@ import { SingleMovie } from 'src/app/shared/interface/singleMovie-interface';
 })
 export class MovieComponent implements OnInit {
   id: string;
-  works: boolean;
+  works: boolean = true;
   data: SingleMovie;
   cast: Cast[];
 
@@ -28,32 +28,32 @@ export class MovieComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.id = params.get('id')!;
       this.getMovie(this.id);
-    });
-
-    this.http.getCast(this.id).subscribe((res) => {
-      this.works = false;
-      this.cast = res;
-      console.log('cast:', this.cast);
+      this.getCast(this.id);
     });
   }
 
-  getMovie(id: any): void {
+  getMovie(id: string): void {
     this.http.getMovie(id).subscribe(
       (res: any) => {
         this.data = res;
-        this.works = true;
         console.log('data', this.data);
       },
       (error) => {
         if (error.status == 404) {
           this.works = false;
-          alert("Opss.. Couldn't find a movie!");
-          this.router.navigate;
+          this.router.navigate(['/**']);
         } else {
           this.works = false;
           alert('Opss.. Something went wrong!');
         }
       }
     );
+  }
+
+  getCast(id: string): void {
+    this.http.getCast(this.id).subscribe((res) => {
+      this.cast = res;
+      console.log('cast:', this.cast);
+    });
   }
 }

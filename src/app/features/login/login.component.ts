@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
               this.nav.navAppear$.next(true);
               this.login.isLogged = true;
               console.log(this.login.isLoggedIn());
-              localStorage.setItem('user', 'user');
+              localStorage.setItem('user', user);
               this.router.navigate(['/main']);
             } else {
               alert('user not found!');
